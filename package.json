@@ -1,0 +1,15 @@
+{
+  "name": "aping",
+  "version": "1.0.0",
+  "description": "Ping api endpoint, keep session alive",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Szabolcs Kurdi <szabolcs.kurdi@gmail.com> (https://github.com/szkrd)",
+  "license": "ISC",
+  "dependencies": {
+    "request": "2.79.0"
+  }
+}
