@@ -1,19 +1,31 @@
-var request = require('request');
-var sid = process.env.SID;
-var apiUrl = process.env.API_URL;
-var timeout = parseInt(process.env.TIMEOUT, 10) || 60 * 1000 * 5;
-var endpoint = process.env.ENDPOINT || '/asset/yellowRibbon'; // we love yellow ribbons
-var options = {
+require('dotenv-safe').load({allowEmptyValues: true})
+const request = require('request')
+const chalk = require('chalk')
+
+let sid = process.env.SID
+let apiUrl = process.env.API_URL
+let timeout = parseInt(process.env.TIMEOUT, 10) || 60 * 1000 * 5
+let endpoint = process.env.ENDPOINT || '/asset/yellowRibbon' // we love yellow ribbons
+let options = {
   method: 'GET',
   url: `${apiUrl}${endpoint}`,
-  headers: { 'cache-control': 'no-cache', 'content-type': 'application/json', accept: 'application/json', cookie: `ASP.NET_SessionId=${sid};` },
+  headers: {
+    'cache-control': 'no-cache',
+    'content-type': 'application/json',
+    accept: 'application/json',
+    cookie: `ASP.NET_SessionId=${sid};`
+  },
   json: true
-};
-let i = 0;
-console.log(`Pinging ${apiUrl} with sid ${sid}.`);
+}
+let i = 0
+console.log(`Pinging ${apiUrl} with sid ${sid}.\n`)
 setInterval(() => {
   request(options, (error, response, body) => {
-    if (error) console.error(error);
-    console.log(i++, typeof body);
-  });
-}, timeout);
+    let timestamp = (new Date()).toISOString().substring(0, 19).replace('T', ' ')
+    if (error) {
+      console.error(error)
+    } else {
+      console.log(`${chalk.green(timestamp)} - ${i++}. sid ${chalk.yellow(sid)}, response body is ${body ? 'empty' : 'valid json'}.`)
+    }
+  })
+}, timeout)

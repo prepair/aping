@@ -5,4 +5,5 @@ Ping api, keep session alive, be happy.
 ## Usage:
 
 1. `npm i`
-2. `SID=yn2igmbcb043pm2jwdhrvsjh API_URL=http://be.dev.webdev-fizzbuzz.local/api' node .`
+2. create `.env` file (without SID), see [example](./.env.example)
+3. `SID=yn2igmbcb043pm2jwdhrvsjh node .`
