@@ -2,10 +2,15 @@ require('dotenv-safe').load({allowEmptyValues: true})
 const request = require('request')
 const chalk = require('chalk')
 
-let sid = process.env.SID
+let sid = process.env.SID || process.argv[2]
 let apiUrl = process.env.API_URL
 let timeout = parseInt(process.env.TIMEOUT, 10) || 60 * 1000 * 5
 let endpoint = process.env.ENDPOINT || '/asset/yellowRibbon' // we love yellow ribbons
+
+if (!sid) {
+  throw new Error('SID not set.')
+}
+
 let options = {
   method: 'GET',
   url: `${apiUrl}${endpoint}`,
