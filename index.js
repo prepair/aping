@@ -21,7 +21,7 @@ if (!apiUrl) {
 
 let options = {
   method: 'GET',
-  url: `API_URL${apiUrl}${endpoint}`,
+  url: `${apiUrl}${endpoint}`,
   headers: {
     'cache-control': 'no-cache',
     'content-type': 'application/json',
