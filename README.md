@@ -11,3 +11,8 @@ Ping api, keep session alive, be happy.
 You can also specify the SID as a param:
 
 `node . l0rkhlv3v01i3hwqxah2y5xs`
+
+To call the secondary api url:
+
+- `node . l0rkhlv3v01i3hwqxah2y5xs 1` uses API_URL_1
+- `node . l0rkhlv3v01i3hwqxah2y5xs 2` uses API_URL_2

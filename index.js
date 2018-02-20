@@ -1,19 +1,27 @@
-require('dotenv-safe').load({allowEmptyValues: true})
+require('dotenv').config()
 const request = require('request')
 const chalk = require('chalk')
 
 let sid = process.env.SID || process.argv[2]
-let apiUrl = process.env.API_URL
+let apiUrlPostfix = (process.argv[3] || '').toUpperCase()
+let apiUrlEnv = 'API_URL' + (apiUrlPostfix ? `_${apiUrlPostfix}` : '')
+let apiUrl = process.env[apiUrlEnv]
 let timeout = parseInt(process.env.TIMEOUT, 10) || 60 * 1000 * 5
-let endpoint = process.env.ENDPOINT || '/asset/yellowRibbon' // we love yellow ribbons
+let endpoint = process.env.ENDPOINT || '/customer/customeraccounthistory ' // we love profile pages
 
 if (!sid) {
-  throw new Error('SID not set.')
+  console.error('SID not set.')
+  process.exit(1)
+}
+
+if (!apiUrl) {
+  console.error(`${apiUrlEnv} not set.`)
+  process.exit(1)
 }
 
 let options = {
   method: 'GET',
-  url: `${apiUrl}${endpoint}`,
+  url: `API_URL${apiUrl}${endpoint}`,
   headers: {
     'cache-control': 'no-cache',
     'content-type': 'application/json',
